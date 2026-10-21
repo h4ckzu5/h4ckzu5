@@ -11,11 +11,11 @@
 <meta property="og:image" content="">
 
 <style type="text/css">
-/* ===== Capa de loading: fade con CSS PURO (funciona aunque fallen los scripts) ===== */
+/* ===== Capa de loading: fade con CSS PURO ===== */
 #loading{
   position:fixed;top:0;left:0;background-color:#000;width:100%;
   height:100%;color:black;z-index:9000;overflow:hidden;
-  animation:fadeOutLoading 5s ease 5s forwards; /* espera 5s, desvanece en 5s */
+  animation:fadeOutLoading 5s ease 5s forwards;
   /* Si quieres los 15s originales: animation:fadeOutLoading 5s ease 15s forwards; */
 }
 @keyframes fadeOutLoading{
@@ -31,6 +31,36 @@ body{
   overflow:auto;
 }
 html{ overflow:auto; }
+
+/* ===== FONDO DE PARTICULAS: fijo, ocupando TODA la pantalla, DETRAS del contenido ===== */
+#particles-js{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* ===== ICONOS: tamaño fijo y alineados ===== */
+.github-imagen,
+.twitter-imagen,
+.pastebin-imagen,
+.youtube-imagen{
+  width:64px;
+  height:64px;
+  object-fit:contain;
+  margin:10px;
+  vertical-align:middle;
+  transition:transform .2s;
+}
+.github-imagen:hover,
+.twitter-imagen:hover,
+.pastebin-imagen:hover,
+.youtube-imagen:hover{
+  transform:scale(1.2);
+}
 
 td{
   background-color:#000;
@@ -67,12 +97,20 @@ h1{
   color:#000000;
   text-shadow:0 0 5px #898989, 0 0 10px #898989, 0 0 30px #898989, 0 0 45px #898989, 0 0 60px #898989;
 }
+
+/* El contenido principal debe estar encima del fondo de particulas */
+.panel,
+.ascii,
+center{
+  position:relative;
+  z-index:1;
+}
 </style>
 </head>
 
 <body bgcolor="#000000" oncontextmenu="return false">
 
-<!-- ====== PRIMERA PARTE: mensaje al admin (desaparece sola por CSS) ====== -->
+<!-- ====== PRIMERA PARTE: mensaje al admin ====== -->
 <div id="loading">
   <br><br><br>
   <div style="margin-top:-370px; margin-right:512px;">
@@ -93,8 +131,12 @@ h1{
   </div>
 </div>
 
-<!-- ====== SEGUNDA PARTE (la que antes no se veía) ====== -->
+<!-- ====== FONDO DE PARTICULAS (fijo detrás de todo) ====== -->
+<div id="particles-js"></div>
+
+<!-- ====== SEGUNDA PARTE: contenido principal ====== -->
 <center>
+<div class="panel" style="display:block;">
 <div class='ascii' style="color:white; text-shadow:15px 15px 6px #999; font-size:10px;">
 <pre>
 888b     d888                   d8b                            888    888                   888                                
@@ -137,8 +179,6 @@ qTox ID: 4E941CF33C516E8D32C0016FDBD78DDF529F5A89916C27DB735807365EF3B5065626E41
 </font>
 </font>
 </center>
-
-<div id="particles-js"></div>
 
 <!-- ====== SCRIPTS ====== -->
 <script type="text/javascript">
